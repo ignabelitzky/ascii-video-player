@@ -32,6 +32,8 @@ int main(int argc, char *argv[]) {
     // Don't display pressed keys
     noecho();
 
+    nodelay(stdscr, TRUE);
+
     // Initialise of colors
     if(has_colors()) {
         start_color();
@@ -44,6 +46,8 @@ int main(int argc, char *argv[]) {
     getmaxyx(stdscr, yMax, xMax);
 
     move(0, 0);
+
+    int input = '\0';
 
     while(true) {
         cap >> frame;
@@ -62,11 +66,14 @@ int main(int argc, char *argv[]) {
                 colorRed = frame.at<cv::Vec3b>(i, j)[2];
                 avgColor = (colorBlue + colorGreen + colorRed) / 3;
                 index = floor(avgColor / (255 / density.size()));
-                if(index >= density.size())
-                index = density.size() - 1;
+                if(index >= static_cast<int>(density.size()))
+                    index = density.size() - 1;
                 addch(density.at(index));
                 index = 0;
             }
+            input = getch();
+            if(input == 'q' || input == 'Q')
+                break;
             move(i+1, 0);
         }
         refresh();

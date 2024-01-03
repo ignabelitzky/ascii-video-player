@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++23 -march=native -O2
+CXXFLAGS := -Wall -Werror -Wextra -pedantic -std=c++17 -march=native -O2
 NCURSES_LIBS := -lncurses
 OPENCV_LIBS := `pkg-config --cflags --libs opencv`
 
