@@ -71,13 +71,13 @@ int main(int argc, char *argv[]) {
                 addch(density.at(index));
                 index = 0;
             }
-            input = getch();
-            if(input == 'q' || input == 'Q')
-                break;
             move(i+1, 0);
         }
         refresh();
         napms(33);
+        input = getch();
+        if(input == 'q' || input == 'Q')
+            break;
     }
     cap.release();
     getch();
