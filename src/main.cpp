@@ -16,17 +16,10 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // std::string density = "@%*+=-. '~^_:;,<ix+-?10|tfjrxnuvM@$0ZNTIt;:";
-    // std::string density = " .:-=+*#%@";
-    std::string density = "@%#*+=-:. ";
-    // std::string density = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`. ";
-
     cv::VideoCapture cap(argv[1]);
     double fps = cap.get(cv::CAP_PROP_FPS);
     cv::Mat frame;
     int videoHeight = 0, videoWidth = 0;
-    int colorBlue = 0, colorGreen = 0, colorRed = 0;
-    int index = 0, avgColor = 0;
 
     // Initialise screen
     initscr();
@@ -39,6 +32,9 @@ int main(int argc, char *argv[])
 
     // Don't display pressed keys
     noecho();
+
+    // Hide cursor
+    curs_set(0);
 
     nodelay(stdscr, TRUE);
 
@@ -81,23 +77,17 @@ int main(int argc, char *argv[])
         }
         cv::resize(frame, frame, cv::Size(xMax, yMax));
         cv::Size sz = frame.size();
+        cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
         videoWidth = sz.width;
         videoHeight = sz.height;
         for (int i = 0; i < videoHeight; ++i)
         {
             for (int j = 0; j < videoWidth; ++j)
             {
-                colorBlue = frame.at<cv::Vec3b>(i, j)[0];
-                colorGreen = frame.at<cv::Vec3b>(i, j)[1];
-                colorRed = frame.at<cv::Vec3b>(i, j)[2];
-                avgColor = (colorBlue + colorGreen + colorRed) / 3;
-                index = floor(avgColor / (255 / density.size()));
-                if (index >= static_cast<int>(density.size()))
-                    index = density.size() - 1;
-                addch(density.at(index));
-                index = 0;
+                uchar intensity = frame.at<uchar>(i, j);
+                char asciiPixel = intensityToASCII(intensity);
+                mvaddch(i, j, asciiPixel);
             }
-            move(i + 1, 0);
         }
         refresh();
         auto finalTime = std::chrono::high_resolution_clock::now();

@@ -5,10 +5,12 @@
 #include <iostream>
 #include "miniaudio.hpp"
 
+char intensityToASCII(int intensity);
+
 void show_usage(std::string programName);
 
-bool check_input(int& argc, char**& argv);
+bool check_input(int &argc, char **&argv);
 
-void data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
+void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount);
 
 #endif
