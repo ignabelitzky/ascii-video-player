@@ -1,9 +1,9 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
-#include <string>
-#include <iostream>
 #include "miniaudio.hpp"
+#include <iostream>
+#include <string>
 
 char intensityToASCII(int intensity);
 

@@ -1,10 +1,10 @@
-#include <iostream>
-#include <ncurses.h>
-#include <chrono>
+#include "../include/audio.hpp"
+#include "../include/utils.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-#include "../include/utils.hpp"
-#include "../include/audio.hpp"
+#include <chrono>
+#include <iostream>
+#include <ncurses.h>
 #define MINIAUDIO_IMPLEMENTATION
 #include "../include/miniaudio.hpp"
 #include <chrono>
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     try
     {
-        audio = new Audio("./resources/audios/gta_vi.mp3");
+        audio = new Audio(argv[2]);
     }
     catch (std::runtime_error &e)
     {
