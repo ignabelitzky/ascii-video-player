@@ -30,7 +30,7 @@ make
 ```
 3. Run the executable
 ```bash
-./video-player <path-video-file>
+./video-player <path-video-file> <path-audio-file>
 ```
 
 ## License
