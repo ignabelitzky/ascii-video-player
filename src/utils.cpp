@@ -2,8 +2,8 @@
 
 char intensityToASCII(int intensity)
 {
-    // std::string density = " .:-=+*#%@";
-    std::string density = "@%#*+=-:. ";
+    std::string density = " .:-=+*#%@";
+    //std::string density = "@%#*+=-:. ";
     int index = intensity * density.size() / 256;
     return density[index];
 }
